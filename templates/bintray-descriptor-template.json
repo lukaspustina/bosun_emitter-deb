@@ -25,7 +25,7 @@
 
     "files":
         [
-        {"includePattern": "(@@PACKAGE_NAME@@.*\.deb)", "uploadPattern": "$1", "matrixParams": { "deb_distribution": "@@DIST@@", "deb_component": "main", "deb_architecture": "@@ARCH@@"}}
+        {"includePattern": "/home/travis/build/lukaspustina/bosun_emitter-deb/(@@PACKAGE_NAME@@.*\.deb)", "uploadPattern": "$1", "matrixParams": { "deb_distribution": "@@DIST@@", "deb_component": "main", "deb_architecture": "@@ARCH@@"}}
         ],
     "publish": true
 }
