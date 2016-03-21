@@ -17,10 +17,10 @@ clean:
 	-rm $(BASE_NAME)-$(VERSION)-$(ARCH).deb
 
 bintray-descriptor.json: templates/bintray-descriptor-template.json
-	DATE=`date +"%Y-%m-%d"`; sed "s/@@PACKAGE_NAME@@/$(BASE_NAME)/; s/@@VERSION@@/$(VERSION)/; s/@@ARCH@@/$(ARCH)/; s/@@VCS_TAG@@/$(TAG)/; s/@@DIST@@/$(DIST)/; s/@@DATE@@/$${DATE}/" $< > $@
+	DATE=`date +"%Y-%m-%d"`; SAN_VERSION=`echo $$VERSION | sed 's/^[a-z]*//'`; sed "s/@@PACKAGE_NAME@@/$(BASE_NAME)/; s/@@VERSION@@/$${SAN_VERSION}/; s/@@ARCH@@/$(ARCH)/; s/@@VCS_TAG@@/$(TAG)/; s/@@DIST@@/$(DIST)/; s/@@DATE@@/$${DATE}/" $< > $@
 
 $(BASE_NAME)/DEBIAN/control: templates/DEBIAN/control $(BASE_NAME)/usr/bin/$(BIN_NAME) $(BASE_NAME)/DEBIAN
-	SIZE=`du -s $(BASE_NAME)/usr/bin/$(BIN_NAME) | awk '{ print $$1}'`; sed "s/@@PACKAGE_NAME@@/$(BASE_NAME)/; s/@@VERSION@@/$(VERSION)/; s/@@ARCH@@/$(ARCH)/; s/@@SIZE@@/$${SIZE}/" $< > $@
+	SIZE=`du -s $(BASE_NAME)/usr/bin/$(BIN_NAME) | awk '{ print $$1}'`; SAN_VERSION=`echo $$VERSION | sed 's/^[a-z]*//'`; sed "s/@@PACKAGE_NAME@@/$(BASE_NAME)/; s/@@VERSION@@/$${SAN_VERSION}/; s/@@ARCH@@/$(ARCH)/; s/@@SIZE@@/$${SIZE}/" $< > $@
 
 $(BASE_NAME)/usr/bin/$(BIN_NAME): $(BIN_DIR)/$(BIN_NAME) $(BASE_NAME)/usr/bin
 	cp $< $@
