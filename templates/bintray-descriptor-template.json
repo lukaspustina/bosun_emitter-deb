@@ -1,0 +1,31 @@
+{
+    "package": {
+        "name": "@@PACKAGE_NAME@@",
+        "repo": "@@PACKAGE_NAME@@",
+        "subject": "lukaspustina",
+        "desc": "A command line tool sending metric data to Bosun.",
+        "website_url": "www.bintray.com",
+        "issue_tracker_url": "https://github.com/lukaspustina/bosun_emitter/issues",
+        "vcs_url": "https://github.com/lukaspustina/bosun_emitter.git",
+        "github_use_tag_release_notes": true,
+        "github_release_notes_file": "RELEASE.txt",
+        "licenses": ["MIT"],
+        "labels": ["bosun", "command", "line", "metric"],
+        "public_download_numbers": false,
+        "public_stats": false
+    },
+
+    "version": {
+        "name": "@@VERSION@@",
+        "desc": "@@VCS_TAG@@",
+        "released": "@@DATE@@",
+        "vcs_tag": "@@VCS_TAG@@",
+        "gpgSign": false
+    },
+
+    "files":
+        [
+        {"includePattern": "(.*.deb)", "uploadPattern": "$1", "matrixParams": { "deb_distribution": "@@DIST@@", "deb_component": "main", "deb_architecture": "@@ARCH@@"}}
+        ],
+    "publish": true
+}

@@ -16,7 +16,7 @@ clean:
 	-rm -fR $(BASE_NAME)
 	-rm $(BASE_NAME)-$(VERSION)-$(ARCH).deb
 
-bintray-descriptor.json: templates/bintray-descriptor.json
+bintray-descriptor.json: templates/bintray-descriptor-template.json
 	DATE=`date +"%Y-%m-%d"`; sed "s/@@PACKAGE_NAME@@/$(BASE_NAME)/; s/@@VERSION@@/$(VERSION)/; s/@@ARCH@@/$(ARCH)/; s/@@VCS_TAG@@/$(TAG)/; s/@@DIST@@/$(DIST)/; s/@@DATE@@/$${DATE}/" $< > $@
 
 $(BASE_NAME)/DEBIAN/control: templates/DEBIAN/control $(BASE_NAME)/usr/bin/$(BIN_NAME) $(BASE_NAME)/DEBIAN
