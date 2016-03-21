@@ -4,9 +4,9 @@ BIN_NAME=emit_bosun
 all:
 	@echo 'Example: BIN_DIR=../bosun_emitter/target/debug ARCH=amd64 VERSION=0.1.0-alpha-3 TAG=$VERSION DIST=trusty package bintray-descriptor.json'
 
-package: $(BASE_NAME)-$(VERSION)-$(ARCH).deb
+package: $(BASE_NAME)-$(VERSION)-$(DIST)-$(ARCH).deb
 
-$(BASE_NAME)-$(VERSION)-$(ARCH).deb: $(BASE_NAME)/DEBIAN/control $(BASE_NAME)/usr/bin/$(BIN_NAME)
+$(BASE_NAME)-$(VERSION)-$(DIST)-$(ARCH).deb: $(BASE_NAME)/DEBIAN/control $(BASE_NAME)/usr/bin/$(BIN_NAME)
 	chmod +x $<
 	dpkg-deb -b $(BASE_NAME) $@
 	dpkg-deb -I $@
