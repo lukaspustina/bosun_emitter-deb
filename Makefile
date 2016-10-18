@@ -2,11 +2,11 @@ BASE_NAME=bosun-emitter
 BIN_NAME=emit_bosun
 
 all:
-	@echo 'Example: BIN_DIR=../bosun_emitter/target/debug ARCH=amd64 VERSION=0.1.0-alpha-3 TAG=$VERSION DIST=trusty package'
+	@echo 'Example: BIN_DIR=../bosun_emitter/target/debug ARCH=amd64 VERSION=0.1.0-alpha-3 TAG=$VERSION DIST=trusty make package'
 
 package: $(BASE_NAME)-$(VERSION)-$(DIST)-$(ARCH).deb
 
-$(BASE_NAME)-$(VERSION)-$(DIST)-$(ARCH).deb: $(BASE_NAME)/DEBIAN/control $(BASE_NAME)/usr/bin/$(BIN_NAME)
+$(BASE_NAME)-$(VERSION)-$(DIST)-$(ARCH).deb: $(BASE_NAME)/DEBIAN/control $(BASE_NAME)/DEBIAN/postinst $(BASE_NAME)/usr/bin/$(BIN_NAME)
 	chmod +x $<
 	dpkg-deb -b $(BASE_NAME) $@
 	dpkg-deb -I $@
@@ -20,6 +20,10 @@ $(BASE_NAME)/DEBIAN/control: templates/DEBIAN/control $(BASE_NAME)/usr/bin/$(BIN
 
 $(BASE_NAME)/usr/bin/$(BIN_NAME): $(BIN_DIR)/$(BIN_NAME) $(BASE_NAME)/usr/bin
 	cp $< $@
+
+$(BASE_NAME)/DEBIAN/postinst: templates/DEBIAN/postinst
+	cp $< $@
+	chmod 755 $@
 
 $(BASE_NAME)/usr/bin:
 	mkdir -p $@

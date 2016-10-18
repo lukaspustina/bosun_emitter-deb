@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 Vagrant.require_version ">= 1.4.0"
 
-BOX_NAME = "deb-build-env"
+BOX_NAME = "deb-build-env-emit-bosun"
 
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/trusty64"
